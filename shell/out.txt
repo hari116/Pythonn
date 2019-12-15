@@ -1,0 +1,5 @@
+total 12
+drwxr-xr-x 2 hari hari 4096 Dec  7 22:17 .
+drwxrwxr-x 6 hari hari 4096 Dec  7 22:13 ..
+-rw-r--r-- 1 hari hari    0 Dec  7 22:17 out.txt
+-rw-r--r-- 1 hari hari   53 Dec  7 22:17 shell.py

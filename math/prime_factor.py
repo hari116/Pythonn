@@ -1,12 +1,30 @@
 #Highest prime factor of n
+import sys
 
-n=input('Enter num:')
-if n==2:
-	HPF=2
-if n==0:
-	HPF='Not Valid'
-if n==1:
-	HPF=1
+
+# print(sys.argv[1:])
+if len(sys.argv[1:]) == 0:
+	n=input('Enter num:')
 else:
-	for i in range(n,2,-1):
-		print(i)
+	n=int(sys.argv[1])
+#is n a pn??
+for i in range(2,n/2):
+	if n%i == 0:
+		break
+else:
+	print(n,'is the HPF')	
+#else
+#factor
+for i in range(n/2,2,-1):
+	if n%i == 0:
+		for j in (2,i):
+			if i%j == 0:
+				break
+		else:
+			print(i, 'is the max prime')
+			
+
+
+
+
+
