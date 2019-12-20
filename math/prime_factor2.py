@@ -1,7 +1,6 @@
 #Highest prime factor of n
 import sys
 
-# global n
 # print(sys.argv[1:])
 if len(sys.argv[1:]) == 0:
 	n=input('Enter num:')
