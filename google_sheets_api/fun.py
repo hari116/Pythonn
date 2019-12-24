@@ -13,8 +13,8 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']  # .readonly if read o
 creds = None
 
 # The ID and range of a sample spreadsheet.
-SPREADSHEET_ID = '1Oq8CAD8Y7LSIw4Md0vy4g_83CtS6ibIB3ekQqNYdIGc'  # test.xlsx
-# SPREADSHEET_ID = '1Ib86_qGr_Lx6DKL7RjMfivlCYyjVJmVPP-Ev01vuLIk'  # oriental.xlsx
+# SPREADSHEET_ID = '1Oq8CAD8Y7LSIw4Md0vy4g_83CtS6ibIB3ekQqNYdIGc'  # test.xlsx
+SPREADSHEET_ID = '1Ib86_qGr_Lx6DKL7RjMfivlCYyjVJmVPP-Ev01vuLIk'  # oriental.xlsx
 RANGE_NAME = 'Pvt.Car!C5'
 RANGE_NAMES = ['Sheet1', 'Sheet2']
 
@@ -110,24 +110,26 @@ def updateSheets():
 
 def batchUpdate():
     value = [
-        [360000, 75000, 1, 1],
-        [2015, 'A', 1200]
+        [[360000, 75000, 1, 1]],
+        [[2015, 'A', 1200]]
     ]
     data = [
         {
-            'range': 'Sheet2!A1:B1',
-            'values': [12, 33]
+            'range': 'Pvt.Car!C4:C7',
+            'values': value[0]
         },
         {
-            'range': 'Sheet2!A2:B2',
-            'values': [13, 40]
+            'range': 'Pvt.Car!G4:G6',
+            'values': value[1]
         }
     ]
     body = {
-        # 'valueInputOption':
-        'majorDimension': 'COLUMNS',
+        'valueInputOption': 'USER_ENTERED',
+        # 'majorDimension': 'COLUMNS',
         'data': data
     }
+    # print(data[0]['values'][1])
+    # exit()
     request = service.spreadsheets().values().batchUpdate(
         spreadsheetId=SPREADSHEET_ID, body=body
     )
