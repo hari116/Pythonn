@@ -1,3 +1,4 @@
+from __future__ import print_function
 from sys import argv as argv
 
 
@@ -29,30 +30,35 @@ def letterShift():
         print('Invalid input!')
 
 
-def parser():
-    str = 'take an input an +add -inus again'
+def geethuParser():
+    # sntnce = input('Enter strings')
     n = 4
-    wrds = str.split(' ')
+    sntnce = input('Enter sentence to be parsed:\n')
+    wrds = sntnce.split(' ')
     print(wrds)
     rm_list = []
-    # for i in range(0, len(wrds)):
-    for i in range(len(wrds) - 1, -1, -1):
-        lttr = list(wrds[i])
-        # print(wrds[i])
+    itm_set = set()
+    for i, wrd in enumerate(wrds):
+        lttr = list(wrd)
         if lttr[0] == '+':
             lttr.pop(0)
             wrds[i] = ''.join(lttr)
-        elif lttr[0] == '-':
+        elif (wrd in itm_set) or len(lttr) < n or lttr[0] == '-':
             rm_list.append(i)
-        else:
-            if len(lttr) < n:
-                rm_list.append(i)
-        nw_wrd = ''.join(lttr)
-        # print(nw_wrd)
-        print(rm_list)
-    for i in rm_list:
+        # elif lttr[0] == '-':
+        #     rm_list.append(i)
+        # elif len(lttr) < n:
+        #     rm_list.append(i)
+        # elif wrd in itm_set:
+        #     rm_list.append(i)
+        # print(wrd in itm_set)
+        itm_set.add(wrd)
+
+    for i in reversed(rm_list):
         wrds.pop(i)
-    print(wrds)
+    sntnce = ' '.join(wrds)
+    print(sntnce)
+
 
 def takeInput():
     pass
@@ -60,4 +66,4 @@ def takeInput():
 
 if __name__ == '__main__':
     # letterShift()
-    parser()
+    geethuParser()
