@@ -38,7 +38,7 @@ def getCreds():
         # Save the credentials for next run
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
-    print('getCreds ran')
+    # print('getCreds ran')
 
 
 def readSheets(READ_RANGE):
@@ -48,14 +48,12 @@ def readSheets(READ_RANGE):
     # Call the sheets API
     SheetService = service.spreadsheets()
     request = SheetService.values().get(spreadsheetId=SPREADSHEET_ID, range=READ_RANGE, majorDimension='ROWS')
-    # request = SheetService.values().batchGet(spreadsheetId=SPREADSHEET_ID, ranges=RANGE_NAMES)
     response = request.execute()
     values = response.get('values', [])  # =response['values']
     for row in values:
         for cell in row:
             print(cell, end=' ')
         print('\n')
-    # print(values[0][0])
 
 
 def batchRead():
@@ -110,22 +108,23 @@ def updateSheets():
 
 def batchUpdate():
     value = [
-        [[360000, 75000, 1, 1]],
+        [[360000, 75000, 12, 12]],
         [[2015, 'A', 1200]]
     ]
     data = [
         {
             'range': 'Pvt.Car!C4:C7',
+            'majorDimension': 'COLUMNS',
             'values': value[0]
         },
         {
             'range': 'Pvt.Car!G4:G6',
+            'majorDimension': 'COLUMNS',
             'values': value[1]
         }
     ]
     body = {
         'valueInputOption': 'USER_ENTERED',
-        # 'majorDimension': 'COLUMNS',
         'data': data
     }
     # print(data[0]['values'][1])
@@ -138,15 +137,16 @@ def batchUpdate():
 
 
 """main()"""
-# Immideately run getCred()
-getCreds()
-# Initializing service obj
-service = build('sheets', 'v4', credentials=creds)  # service = discovery.build('sheets', 'v4', credentials=credentials)
 
 if __name__ == '__main__':
+    # Immideately run getCred()
+    getCreds()
+    # Initializing service obj
+    service = build('sheets', 'v4',
+                    credentials=creds)  # service = discovery.build('sheets', 'v4', credentials=credentials)
     # updateSheets()
     batchUpdate()
     # readSheets('Pvt.Car!B33:G36')
-    readSheets('Sheet2!A1:C2')
+    readSheets('Pvt.Car')
     # batchRead()
     # createSheets('new23dec4')
