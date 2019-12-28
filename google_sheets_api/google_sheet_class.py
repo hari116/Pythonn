@@ -32,14 +32,30 @@ class sheetApi:
             j = json.load(f)
         return j
 
+    def createCoords(self, crds=None):
+        with open(f'google_sheets_api/{self.SPREADSHEET_ID}_{self.sheetName}.json', 'xt') as f:
+            crds = {
+                "IDV": "C4",
+                "elec": "C5",
+                "CNGKV": "C6",
+                "manYr": "G4",
+                "vehicleWt": "G5",
+                "zone": "G6"
+            }
+
+            json.dump(crds, f, ensure_ascii=False, indent=4)
+
     def getCoords(self, key=None):
         if key is not None:
             return self.coords.get(key)
         else:
             return self.coords
 
-    def changeCoords(self, ):
-        pass
+    def updateCoords(self, term, value):
+        coords = self.coords
+        coords[term] = value
+        with open(f'google_sheets_api/{self.SPREADSHEET_ID}_{self.sheetName}.json', 'wt') as f:
+            json.dump(coords, f, ensure_ascii=False, indent=4)
 
     def read(self, range, mDim='ROWS'):
         rangeKey = f'{self.sheetName}!{range}'
@@ -92,7 +108,7 @@ class sheetApi:
         else:
             return self.coords
 
-    def changeCoords(self, term='IDV', coord='A1' ):
+    def changeCoords(self, term='IDV', coord='A1'):
         pprint(self.getCoords())
 
 
@@ -105,4 +121,5 @@ if __name__ == '__main__':
     # carrier1.write(700000, 20000, 12, 2016, 1200, 'C')
     # carrier1.read('A28:G28')
     # pprint(carrier1.getCoords('elec'))
-    carrier1.changeCoords('IDV', 'A1')
+    # carrier1.changeCoords('IDV', 'A1')
+    carrier1.updateCoords()
