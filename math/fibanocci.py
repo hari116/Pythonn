@@ -34,5 +34,5 @@ if __name__ == '__main__':
     inst = IterFibanocci()
     myiter = iter(inst)
     # print(next(myiter))
-    for i in range(100):
+    for i in range(10):
         print(next(myiter)[1])
