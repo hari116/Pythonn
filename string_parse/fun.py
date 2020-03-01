@@ -7,17 +7,23 @@ def actualLetterShift(word, pos, off):
     myList = list(word)
     pos -= 1  # array pos
     final_pos = pos + off  # given pos + off -1
+
+    # for i in range(pos, final_pos):
+    #     tmp = myList[i]
+    #     myList[i] = myList[i + 1]
+    #     myList[i + 1] = tmp
+    tmp = myList[pos]
     for i in range(pos, final_pos):
-        tmp = myList[i]
-        myList[i] = myList[i + 1]
-        myList[i + 1] = tmp
+        myList[i] = myList[i+1]
+    myList[final_pos] = tmp
+
     word = ''.join(myList)
     return word
 
 
 def letterShift():
     print(argv)
-    if argv:
+    if argv[1:]:
         strng, pos, offst = argv[1:]
     else:
         inpt = input('Enter word, position and order[Seperate by spaces]:\n')
@@ -35,7 +41,7 @@ def geethuParser():
     n = 4
     sntnce = input('Enter sentence to be parsed:\n')
     wrds = sntnce.split(' ')
-    print(wrds)
+    # print(wrds)
     rm_list = []
     itm_set = set()
     for i, wrd in enumerate(wrds):
@@ -65,5 +71,5 @@ def takeInput():
 
 
 if __name__ == '__main__':
-    # letterShift()
-    geethuParser()
+    letterShift()
+    # geethuParser()
